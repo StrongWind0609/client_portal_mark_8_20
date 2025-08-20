@@ -15,7 +15,7 @@ const mockUsers: User[] = [
     email: 'admin@nexushub.com',
     name: 'Admin User',
     role: 'admin',
-    company: 'NexusHub',
+    company: 'RLS Wealth Vault',
     isVerified: true,
     createdAt: '2024-01-01T00:00:00Z'
   },

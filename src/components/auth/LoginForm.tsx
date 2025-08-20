@@ -1,9 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuthStore } from '@/store/authStore';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
 
 interface LoginFormProps {
@@ -12,19 +18,19 @@ interface LoginFormProps {
 }
 
 const LoginForm = ({ onClose, onSwitchToSignup }: LoginFormProps) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login, isLoading } = useAuthStore();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       await login({ email, password });
       toast({
         title: "Login successful",
-        description: "Welcome back to NexusHub!",
+        description: "Welcome back to RLS Wealth Vault!",
       });
       onClose?.();
     } catch (error) {
@@ -69,13 +75,13 @@ const LoginForm = ({ onClose, onSwitchToSignup }: LoginFormProps) => {
             />
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Signing In...' : 'Sign In'}
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
-        
+
         <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <button
               type="button"
               onClick={onSwitchToSignup}

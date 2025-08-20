@@ -1,5 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Video, Users, Calendar, Library } from "lucide-react";
+import {
+  Video,
+  Users,
+  Calendar,
+  Library,
+  Icon,
+  BedIcon,
+  AxeIcon,
+  ImageDownIcon,
+} from "lucide-react";
 
 import { UserRole } from "@/types/auth";
 
@@ -16,22 +25,31 @@ const Header = ({ userRole, onLogin, onSignup, onLogout }: HeaderProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <Video className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold text-foreground">NexusHub</span>
+          <div className="flex items-center space-x-5">
+            <img src="/logo.png" alt="Logo" className="w-8 h-8" />
+            <span className="text-xl font-bold text-foreground">
+              RLS Wealth Vault
+            </span>
           </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a
+              href="#"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               Webinars
             </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a
+              href="#"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               Content Vault
             </a>
-            <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a
+              href="#"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
               About
             </a>
           </nav>
@@ -44,7 +62,9 @@ const Header = ({ userRole, onLogin, onSignup, onLogout }: HeaderProps) => {
                   <div className="w-8 h-8 bg-primary-light rounded-full flex items-center justify-center">
                     <Users className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-sm font-medium capitalize">{userRole}</span>
+                  <span className="text-sm font-medium capitalize">
+                    {userRole}
+                  </span>
                 </div>
                 <Button variant="outline" onClick={onLogout}>
                   Logout
@@ -55,9 +75,7 @@ const Header = ({ userRole, onLogin, onSignup, onLogout }: HeaderProps) => {
                 <Button variant="ghost" onClick={onLogin}>
                   Sign In
                 </Button>
-                <Button onClick={onSignup}>
-                  Get Started
-                </Button>
+                <Button onClick={onSignup}>Get Started</Button>
               </>
             )}
           </div>

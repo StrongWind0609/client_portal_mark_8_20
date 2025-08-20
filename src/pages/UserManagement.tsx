@@ -1,57 +1,92 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Plus, Edit, Trash2, Users, UserCheck, UserX, Activity } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Search,
+  Plus,
+  Edit,
+  Trash2,
+  Users,
+  UserCheck,
+  UserX,
+  Activity,
+} from "lucide-react";
 import { User, UserRole } from "@/types/auth";
 
 // Mock data for demonstration
 const mockUsers: User[] = [
   {
-    id: '1',
-    email: 'admin@nexushub.com',
-    name: 'Admin User',
-    role: 'admin',
-    company: 'NexusHub',
+    id: "1",
+    email: "admin@nexushub.com",
+    name: "Admin User",
+    role: "admin",
+    company: "RLS Wealth Vault",
     isVerified: true,
-    createdAt: '2024-01-01T00:00:00Z',
-    lastLogin: '2024-01-15T08:30:00Z'
+    createdAt: "2024-01-01T00:00:00Z",
+    lastLogin: "2024-01-15T08:30:00Z",
   },
   {
-    id: '2', 
-    email: 'host@nexushub.com',
-    name: 'John Host',
-    role: 'host',
-    company: 'TechCorp',
+    id: "2",
+    email: "host@nexushub.com",
+    name: "John Host",
+    role: "host",
+    company: "TechCorp",
     isVerified: true,
-    createdAt: '2024-01-01T00:00:00Z',
-    lastLogin: '2024-01-14T14:20:00Z'
+    createdAt: "2024-01-01T00:00:00Z",
+    lastLogin: "2024-01-14T14:20:00Z",
   },
   {
-    id: '3',
-    email: 'user@nexushub.com', 
-    name: 'Jane User',
-    role: 'user',
-    company: 'StartupXYZ',
+    id: "3",
+    email: "user@nexushub.com",
+    name: "Jane User",
+    role: "user",
+    company: "StartupXYZ",
     isVerified: true,
-    createdAt: '2024-01-01T00:00:00Z',
-    lastLogin: '2024-01-15T09:45:00Z'
+    createdAt: "2024-01-01T00:00:00Z",
+    lastLogin: "2024-01-15T09:45:00Z",
   },
   {
-    id: '4',
-    email: 'guest@nexushub.com',
-    name: 'Guest Speaker',
-    role: 'guest', 
-    company: 'ExpertCorp',
+    id: "4",
+    email: "guest@nexushub.com",
+    name: "Guest Speaker",
+    role: "guest",
+    company: "ExpertCorp",
     isVerified: false,
-    createdAt: '2024-01-10T00:00:00Z'
-  }
+    createdAt: "2024-01-10T00:00:00Z",
+  },
 ];
 
 const UserManagement = () => {
@@ -62,26 +97,36 @@ const UserManagement = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   // Filter users based on search and role
-  const filteredUsers = users.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.company?.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredUsers = users.filter((user) => {
+    const matchesSearch =
+      user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.company?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = selectedRole === "all" || user.role === selectedRole;
     return matchesSearch && matchesRole;
   });
 
   const getRoleBadgeVariant = (role: UserRole) => {
     switch (role) {
-      case 'admin': return 'default';
-      case 'host': return 'secondary'; 
-      case 'guest': return 'outline';
-      case 'user': return 'secondary';
-      default: return 'outline';
+      case "admin":
+        return "default";
+      case "host":
+        return "secondary";
+      case "guest":
+        return "outline";
+      case "user":
+        return "secondary";
+      default:
+        return "outline";
     }
   };
 
   const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
   };
 
   const formatDate = (dateString: string) => {
@@ -90,9 +135,9 @@ const UserManagement = () => {
 
   const userStats = {
     total: users.length,
-    verified: users.filter(u => u.isVerified).length,
-    active: users.filter(u => u.lastLogin).length,
-    admins: users.filter(u => u.role === 'admin').length
+    verified: users.filter((u) => u.isVerified).length,
+    active: users.filter((u) => u.lastLogin).length,
+    admins: users.filter((u) => u.role === "admin").length,
   };
 
   return (
@@ -101,7 +146,9 @@ const UserManagement = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">User Management</h1>
-          <p className="text-muted-foreground">Manage platform users and their permissions</p>
+          <p className="text-muted-foreground">
+            Manage platform users and their permissions
+          </p>
         </div>
         <Button className="w-fit">
           <Plus className="w-4 h-4 mr-2" />
@@ -166,7 +213,12 @@ const UserManagement = () => {
                 className="pl-10"
               />
             </div>
-            <Select value={selectedRole} onValueChange={(value: UserRole | "all") => setSelectedRole(value)}>
+            <Select
+              value={selectedRole}
+              onValueChange={(value: UserRole | "all") =>
+                setSelectedRole(value)
+              }
+            >
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Filter by role" />
               </SelectTrigger>
@@ -198,11 +250,15 @@ const UserManagement = () => {
                   <TableCell>
                     <div className="flex items-center gap-3">
                       <Avatar>
-                        <AvatarFallback>{getInitials(user.name)}</AvatarFallback>
+                        <AvatarFallback>
+                          {getInitials(user.name)}
+                        </AvatarFallback>
                       </Avatar>
                       <div>
                         <div className="font-medium">{user.name}</div>
-                        <div className="text-sm text-muted-foreground">{user.email}</div>
+                        <div className="text-sm text-muted-foreground">
+                          {user.email}
+                        </div>
                       </div>
                     </div>
                   </TableCell>
@@ -211,21 +267,24 @@ const UserManagement = () => {
                       {user.role}
                     </Badge>
                   </TableCell>
-                  <TableCell>{user.company || '-'}</TableCell>
+                  <TableCell>{user.company || "-"}</TableCell>
                   <TableCell>
                     <Badge variant={user.isVerified ? "default" : "secondary"}>
                       {user.isVerified ? "Verified" : "Pending"}
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    {user.lastLogin ? formatDate(user.lastLogin) : 'Never'}
+                    {user.lastLogin ? formatDate(user.lastLogin) : "Never"}
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-2">
-                      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                      <Dialog
+                        open={isDialogOpen}
+                        onOpenChange={setIsDialogOpen}
+                      >
                         <DialogTrigger asChild>
-                          <Button 
-                            variant="ghost" 
+                          <Button
+                            variant="ghost"
                             size="sm"
                             onClick={() => setSelectedUser(user)}
                           >
@@ -283,14 +342,17 @@ const UserManagement = () => {
                                 </Label>
                                 <Input
                                   id="company"
-                                  defaultValue={selectedUser.company || ''}
+                                  defaultValue={selectedUser.company || ""}
                                   className="col-span-3"
                                 />
                               </div>
                             </div>
                           )}
                           <div className="flex justify-end gap-2">
-                            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                            <Button
+                              variant="outline"
+                              onClick={() => setIsDialogOpen(false)}
+                            >
                               Cancel
                             </Button>
                             <Button onClick={() => setIsDialogOpen(false)}>

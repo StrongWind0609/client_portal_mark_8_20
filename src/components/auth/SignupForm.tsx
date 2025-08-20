@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from "@/store/authStore";
 import { useToast } from "@/hooks/use-toast";
 
 interface SignupFormProps {
@@ -14,22 +20,22 @@ interface SignupFormProps {
 
 const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    agreeToTerms: false
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    agreeToTerms: false,
   });
   const { signup, isLoading } = useAuthStore();
   const { toast } = useToast();
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.agreeToTerms) {
       toast({
         title: "Terms required",
@@ -44,17 +50,19 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        company: formData.company
+        company: formData.company,
       });
       toast({
         title: "Account created successfully",
-        description: "Welcome to NexusHub! Your account has been created.",
+        description:
+          "Welcome to RLS Wealth Vault! Your account has been created.",
       });
       onClose?.();
     } catch (error) {
       toast({
         title: "Signup failed",
-        description: "There was an error creating your account. Please try again.",
+        description:
+          "There was an error creating your account. Please try again.",
         variant: "destructive",
       });
     }
@@ -65,7 +73,7 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
       <CardHeader className="text-center">
         <CardTitle className="text-2xl">Create Account</CardTitle>
         <CardDescription>
-          Join NexusHub to access exclusive webinars and content
+          Join RLS Wealth Vault to access exclusive webinars and content
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -77,11 +85,11 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
               type="text"
               placeholder="Enter your full name"
               value={formData.name}
-              onChange={(e) => handleInputChange('name', e.target.value)}
+              onChange={(e) => handleInputChange("name", e.target.value)}
               required
             />
           </div>
-          
+
           <div className="space-y-2">
             <Label htmlFor="email">Email Address *</Label>
             <Input
@@ -89,7 +97,7 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
               type="email"
               placeholder="Enter your email"
               value={formData.email}
-              onChange={(e) => handleInputChange('email', e.target.value)}
+              onChange={(e) => handleInputChange("email", e.target.value)}
               required
             />
           </div>
@@ -101,7 +109,7 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
               type="tel"
               placeholder="Enter your phone number"
               value={formData.phone}
-              onChange={(e) => handleInputChange('phone', e.target.value)}
+              onChange={(e) => handleInputChange("phone", e.target.value)}
             />
           </div>
 
@@ -112,7 +120,7 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
               type="text"
               placeholder="Enter your company name"
               value={formData.company}
-              onChange={(e) => handleInputChange('company', e.target.value)}
+              onChange={(e) => handleInputChange("company", e.target.value)}
             />
           </div>
 
@@ -120,16 +128,19 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
             <Checkbox
               id="terms"
               checked={formData.agreeToTerms}
-              onCheckedChange={(checked) => 
-                setFormData(prev => ({ ...prev, agreeToTerms: checked as boolean }))
+              onCheckedChange={(checked) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  agreeToTerms: checked as boolean,
+                }))
               }
             />
             <Label htmlFor="terms" className="text-sm">
-              I agree to the{' '}
+              I agree to the{" "}
               <button type="button" className="text-primary hover:underline">
                 Terms of Service
-              </button>{' '}
-              and{' '}
+              </button>{" "}
+              and{" "}
               <button type="button" className="text-primary hover:underline">
                 Privacy Policy
               </button>
@@ -137,13 +148,13 @@ const SignupForm = ({ onClose, onSwitchToLogin }: SignupFormProps) => {
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? 'Creating Account...' : 'Create Account'}
+            {isLoading ? "Creating Account..." : "Create Account"}
           </Button>
         </form>
-        
+
         <div className="mt-6 text-center">
           <p className="text-sm text-muted-foreground">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <button
               type="button"
               onClick={onSwitchToLogin}
