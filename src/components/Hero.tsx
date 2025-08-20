@@ -75,9 +75,8 @@ const Hero = () => {
                 </span>
               </h1>
               <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
-                Connect, engage, and inspire your audience with our
-                comprehensive webinar platform. From intimate workshops to
-                large-scale conferences, we've got you covered.
+                You can automate your income in just 2-7 years by installing the
+                operating system of $25M+ families—D4U in 6 weeks
               </p>
             </div>
 
