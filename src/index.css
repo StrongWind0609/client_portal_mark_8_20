@@ -116,16 +116,35 @@ All colors MUST be HSL.
   }
 }
 
+
 @layer base {
   * {
     @apply border-border;
+    /* Hide scrollbars for all elements */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
   }
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, sans-serif;
+  *::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
   }
+
+body {
+  @apply bg-background text-foreground;
+  font-family: 'Inter', system-ui, sans-serif;
+  /* Hide scrollbars for body */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
+}
+
 
 @layer utilities {
   .line-clamp-2 {
