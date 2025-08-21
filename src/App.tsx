@@ -37,9 +37,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
             <SidebarTrigger />
             <ThemeToggle />
           </header>
-          <div className="flex-1 p-6 bg-muted/30">
-            {children}
-          </div>
+          <div className="flex-1 p-6 bg-muted/30">{children}</div>
         </main>
       </div>
     </SidebarProvider>
@@ -58,24 +56,24 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-        <AppLayout>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Index />} />
-            <Route path="/webinars" element={<WebinarsPage />} />
-            <Route path="/vault" element={<VaultPage />} />
-            <Route path="/analytics" element={<AnalyticsPage />} />
-            <Route path="/users" element={<UserManagement />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/webinars/create" element={<CreateWebinar />} />
-            <Route path="/webinars/live/:id" element={<RunningWebinar />} />
-            <Route path="/vault/upload" element={<VaultUpload />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </AppLayout>
-      </BrowserRouter>
-    </TooltipProvider>
+          <AppLayout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/dashboard" element={<Index />} />
+              <Route path="/webinars" element={<WebinarsPage />} />
+              <Route path="/vault" element={<VaultPage />} />
+              <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="/users" element={<UserManagement />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/webinars/create" element={<CreateWebinar />} />
+              <Route path="/webinars/live/:id" element={<RunningWebinar />} />
+              <Route path="/vault/upload" element={<VaultUpload />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AppLayout>
+        </BrowserRouter>
+      </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );

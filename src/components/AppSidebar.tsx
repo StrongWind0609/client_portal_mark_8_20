@@ -9,8 +9,9 @@ import {
   FileText,
   HelpCircle,
   LogOut,
+  BedDouble,
 } from "lucide-react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -26,11 +27,13 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/authStore";
+import { BarChart } from "recharts";
 
 const AppSidebar = () => {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const { user, logout } = useAuthStore();
+  const navigate = useNavigate();
   const location = useLocation();
 
   // Navigation items based on user role
@@ -46,6 +49,7 @@ const AppSidebar = () => {
         ...baseItems,
         { title: "Analytics", url: "/analytics", icon: BarChart3 },
         { title: "User Management", url: "/users", icon: Users },
+        { title: "Deals", url: "/deals", icon: BedDouble },
         { title: "Settings", url: "/settings", icon: Settings },
       ];
     }
@@ -60,6 +64,11 @@ const AppSidebar = () => {
   const navigationItems = getNavigationItems();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const signout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
     <Sidebar
@@ -186,7 +195,7 @@ const AppSidebar = () => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={logout}
+            onClick={signout}
             className="mt-3 w-full justify-start text-sidebar-foreground/80 hover:text-sidebar-foreground hover:bg-sidebar-accent/50"
           >
             <LogOut className="w-4 h-4 mr-2" />

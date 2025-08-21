@@ -1,52 +1,60 @@
-import { useState } from 'react';
-import { useAuthStore } from '@/store/authStore';
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import LoginForm from '@/components/auth/LoginForm';
-import SignupForm from '@/components/auth/SignupForm';
-import AdminDashboard from '@/components/dashboard/AdminDashboard';
-import UserDashboard from '@/components/dashboard/UserDashboard';
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { useState } from "react";
+import { useAuthStore } from "@/store/authStore";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import LoginForm from "@/components/auth/LoginForm";
+import SignupForm from "@/components/auth/SignupForm";
+import AdminDashboard from "@/components/dashboard/AdminDashboard";
+import UserDashboard from "@/components/dashboard/UserDashboard";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showSignupModal, setShowSignupModal] = useState(false);
-  const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
+  const navigate = useNavigate();
+  const [authMode, setAuthMode] = useState<"login" | "signup">("login");
 
   const handleLogin = () => {
-    setAuthMode('login');
+    setAuthMode("login");
     setShowLoginModal(true);
   };
 
   const handleSignup = () => {
-    setAuthMode('signup');
+    setAuthMode("signup");
     setShowSignupModal(true);
   };
 
   const switchToSignup = () => {
     setShowLoginModal(false);
     setShowSignupModal(true);
-    setAuthMode('signup');
+    setAuthMode("signup");
   };
 
   const switchToLogin = () => {
     setShowSignupModal(false);
     setShowLoginModal(true);
-    setAuthMode('login');
+    setAuthMode("login");
   };
 
   const handleLogout = () => {
     logout();
+    navigate("/");
   };
 
   const renderDashboard = () => {
     if (!isAuthenticated || !user) return null;
 
     switch (user.role) {
-      case 'admin':
+      case "admin":
         return <AdminDashboard />;
-      case 'host':
+      case "host":
         return <AdminDashboard />; // For now, hosts see admin dashboard
       default:
         return <UserDashboard />;
@@ -55,20 +63,22 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header 
-        userRole={user?.role || null} 
+      <Header
+        userRole={user?.role || null}
         onLogin={handleLogin}
         onSignup={handleSignup}
         onLogout={handleLogout}
       />
-      
+
       <main>
         {isAuthenticated ? (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {renderDashboard()}
           </div>
         ) : (
-          <Hero />
+          <>
+            <Hero />
+          </>
         )}
       </main>
 
@@ -79,7 +89,7 @@ const Index = () => {
           <DialogDescription className="sr-only">
             Enter your credentials to access your account
           </DialogDescription>
-          <LoginForm 
+          <LoginForm
             onClose={() => setShowLoginModal(false)}
             onSwitchToSignup={switchToSignup}
           />
@@ -92,7 +102,7 @@ const Index = () => {
           <DialogDescription className="sr-only">
             Sign up for a new account to access exclusive content
           </DialogDescription>
-          <SignupForm 
+          <SignupForm
             onClose={() => setShowSignupModal(false)}
             onSwitchToLogin={switchToLogin}
           />
