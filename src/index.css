@@ -9,7 +9,7 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Natural, professional color palette */
-    --background: 0 0% 100%;
+  --background: 215 60% 98%; /* Soft light blue */
     --foreground: 240 10% 3.9%;
 
     --card: 0 0% 100%;
@@ -49,11 +49,11 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
+  --border: 217.2 32.6% 60%;
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
 
-    --radius: 0.75rem;
+  --radius: 1rem;
 
     /* Natural gradients */
     --gradient-primary: linear-gradient(135deg, hsl(221.2 83.2% 53.3%), hsl(212 100% 47%));
@@ -62,7 +62,7 @@ All colors MUST be HSL.
     
     /* Natural shadows */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 12px 0 rgb(33 150 243 / 0.08), 0 2px 4px -1px rgb(0 0 0 / 0.04);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
 
@@ -118,6 +118,28 @@ All colors MUST be HSL.
 
 
 @layer base {
+  .card {
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius);
+    background: hsl(var(--card));
+  }
+
+  .btn, button {
+    transition: box-shadow 0.2s, transform 0.2s;
+    border-radius: var(--radius);
+  }
+  .btn:hover, button:hover {
+    box-shadow: 0 2px 8px 0 rgb(33 150 243 / 0.12);
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  a {
+    transition: color 0.2s;
+  }
+  a:hover {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+  }
   * {
     @apply border-border;
     /* Hide scrollbars for all elements */
